@@ -6,9 +6,9 @@ import datetime
 import os
 
 # Configura tu correo
-EMAIL_EMISOR = "tucorreo@gmail.com"
-CONTRASENA_APP = "tu_contrasena_app"
-EMAIL_RECEPTOR = "tucorreo@gmail.com"  # Puedes ser el mismo
+EMAIL_EMISOR = "lgarrido.cornejo@gmail.com"
+CONTRASENA_APP = "vtty geve mntm ymxg "
+EMAIL_RECEPTOR = "lgarrido.cornejo@gmail.com"  # Puedes ser el mismo
 
 # Inicializar yagmail
 yag = yagmail.SMTP(EMAIL_EMISOR, CONTRASENA_APP)
