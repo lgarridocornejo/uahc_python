@@ -74,7 +74,7 @@ if codigo_ingresado and nombre_ingresado:
         if archivo_subido:
             # Formatear el nombre del alumno para el archivo
             nombre_archivo = nombre_ingresado.replace(" ", "_").lower()
-            ruta_guardado = f"/resueltos/{codigo_ingresado}_{nombre_archivo}.ipynb"
+            ruta_guardado = f"resueltos/{codigo_ingresado}_{nombre_archivo}.ipynb"
             
             with open(ruta_guardado, "wb") as f:
                 f.write(archivo_subido.read())
