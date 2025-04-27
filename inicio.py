@@ -1,10 +1,20 @@
+
 import streamlit as st
+import yagmail
 import pandas as pd
 import datetime
 import os
 
-# Diccionario solo de códigos válidos
-codigos_validos = {
+# Configura tu correo
+EMAIL_EMISOR = "tucorreo@gmail.com"
+CONTRASENA_APP = "tu_contrasena_app"
+EMAIL_RECEPTOR = "tucorreo@gmail.com"  # Puedes ser el mismo
+
+# Inicializar yagmail
+yag = yagmail.SMTP(EMAIL_EMISOR, CONTRASENA_APP)
+
+# Diccionario de códigos y nombres
+codigos = {
     "d6364414": "pruebas/prueba_d6364414.ipynb",
     "de2913d7": "pruebas/prueba_de2913d7.ipynb",
     "424459e2": "pruebas/prueba_424459e2.ipynb",
@@ -17,53 +27,27 @@ codigos_validos = {
     "e9f4b916": "pruebas/prueba_e9f4b916.ipynb",
 }
 
-# Crear carpeta resueltos si no existe
-if not os.path.exists("resueltos"):
-    os.makedirs("resueltos")
-
-# Crear archivo de registro si no existe
-registro_file = "registro_descargas.csv"
-if not os.path.isfile(registro_file):
-    df_registro = pd.DataFrame(columns=["codigo", "nombre", "evento", "fecha_hora"])
-    df_registro.to_csv(registro_file, index=False)
-
-# Función para registrar eventos
-def registrar_evento(codigo, nombre, evento):
-    df = pd.read_csv(registro_file)
-    nuevo_registro = {
-        "codigo": codigo,
-        "nombre": nombre,
-        "evento": evento,
-        "fecha_hora": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
-    df = pd.concat([df, pd.DataFrame([nuevo_registro])], ignore_index=True)
-    df.to_csv(registro_file, index=False)
-
-# Interfaz
-st.title("📚 Portal de Pruebas de Python")
-st.subheader("Bienvenido al sistema de entrega y recolección de pruebas")
+st.title("📚 Portal de Entrega de Pruebas de Python")
 
 codigo_ingresado = st.text_input("🔑 Ingrese su código de acceso:")
-codigo_ingresado = codigo_ingresado.lower()
-nombre_ingresado = st.text_input("👤 Ingrese su nombre completo:")
+nombre_ingresado = st.text_input("✏️ Ingrese su nombre completo:")
 
 if codigo_ingresado and nombre_ingresado:
-    if codigo_ingresado in codigos_validos:
-        st.success(f"¡Bienvenido {nombre_ingresado}! 🎓")
+    if codigo_ingresado in codigos and codigos[codigo_ingresado]["nombre"].lower() == nombre_ingresado.lower():
+        alumno = codigos[codigo_ingresado]
+        st.success(f"¡Bienvenido {alumno['nombre']}! 🎓")
 
-        archivo_path = codigos_validos[codigo_ingresado]
-        
-        # Botón para descargar la prueba
+        archivo_path = alumno["archivo"]
+
         with open(archivo_path, "rb") as f:
             contenido = f.read()
 
         if st.download_button(
             label="📥 Descargar tu prueba",
             data=contenido,
-            file_name=archivo_path.split("/")[-1],
+            file_name=os.path.basename(archivo_path),
             mime="application/json"
         ):
-            registrar_evento(codigo_ingresado, nombre_ingresado, "Descarga prueba")
             st.info("Recuerda guardar tu archivo antes de enviarlo de vuelta.")
 
         st.markdown("---")
@@ -72,13 +56,26 @@ if codigo_ingresado and nombre_ingresado:
         archivo_subido = st.file_uploader("Selecciona tu archivo resuelto:", type=["ipynb"])
 
         if archivo_subido:
-            # Formatear el nombre del alumno para el archivo
-            nombre_archivo = nombre_ingresado.replace(" ", "_").lower()
-            ruta_guardado = f"resueltos/{codigo_ingresado}_{nombre_archivo}.ipynb"
-            
-            with open(ruta_guardado, "wb") as f:
+            st.success("✅ Archivo recibido. Enviando por correo electrónico...")
+
+            # Guardar archivo temporalmente
+            temp_file_path = f"temp_{archivo_subido.name}"
+            with open(temp_file_path, "wb") as f:
                 f.write(archivo_subido.read())
-            st.success("✅ Archivo subido correctamente. ¡Gracias!")
-            registrar_evento(codigo_ingresado, nombre_ingresado, "Subida prueba resuelta")
+
+            # Enviar correo
+            yag.send(
+                to=EMAIL_RECEPTOR,
+                subject=f"Prueba resuelta de {alumno['nombre']}",
+                contents=f"Adjunto archivo de la prueba enviada por {alumno['nombre']}.",
+                attachments=temp_file_path
+            )
+
+            st.success("📬 ¡Archivo enviado exitosamente!")
+
+            # Borrar archivo temporal
+            os.remove(temp_file_path)
+
     else:
-        st.error("❌ Código inválido. Intente nuevamente.")
+        st.error("❌ Código o nombre incorrecto. Intente nuevamente.")
+
