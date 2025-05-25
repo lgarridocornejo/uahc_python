@@ -36,11 +36,11 @@ def registrar_evento(codigo, nombre, evento):
     df.to_csv(registro_file, index=False)
 
 # Interfaz de Streamlit
-st.title("📚 Portal de Pruebas de Python")
-st.subheader("Bienvenido al sistema de entrega de pruebas")
+st.title("📚 Portal de Pruebas y Proyectos de Python")
+st.subheader("Bienvenido al sistema de entrega de pruebas y proyectos")
 
 codigo_ingresado = st.text_input("🔑 Ingrese su código de acceso:").lower()
-nombre_ingresado = st.text_input("👤 Ingrese su nombre completo:")
+nombre_ingresado = st.text_input("👤 Ingrese nombre:")
 
 if codigo_ingresado and nombre_ingresado:
     if codigo_ingresado in codigos_validos:
@@ -53,7 +53,7 @@ if codigo_ingresado and nombre_ingresado:
             contenido = f.read()
 
         if st.download_button(
-            label="📥 Descargar tu prueba",
+            label="📥 Descargar tu archivo",
             data=contenido,
             file_name=os.path.basename(archivo_path),
             mime="application/json"
