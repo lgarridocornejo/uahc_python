@@ -15,6 +15,11 @@ codigos_validos = {
     "ad8a01b6": "pruebas/prueba_ad8a01b6.ipynb",
     "617fbf7e": "pruebas/prueba_617fbf7e.ipynb",
     "e9f4b916": "pruebas/prueba_e9f4b916.ipynb",
+    "cd917754": "pruebas/proyecto_cd917754.ipynb",
+    "9a668548": "pruebas/proyecto_9a668548.ipynb",
+    "0b9cf1ec": "pruebas/proyecto_0b9cf1ec.ipynb",
+    "acd71a71": "pruebas/proyecto_acd71a71.ipynb",
+    "f4f9bf9f": "pruebas/proyecto_f4f9bf9f.ipynb"
 }
 
 # Crear archivo de registro si no existe
