@@ -20,9 +20,9 @@ codigos_validos = {
     "0b9cf1ec": "pruebas/proyecto_0b9cf1ec.ipynb",
     "acd71a71": "pruebas/proyecto_acd71a71.ipynb",
     "f4f9bf9f": "pruebas/proyecto_f4f9bf9f.ipynb",
-    "6b558034": "pruebas/proyecto_aaaaaaaa.ipynb",
-    "0d5dfc8d": "pruebas/proyecto_bbbbbbbb.ipynb",
-    "1bbad4bf": "pruebas/proyecto_cccccccc.ipynb"
+    "aaaaaaaa": "pruebas/proyecto_aaaaaaaa.ipynb",
+    "bbbbbbbb": "pruebas/proyecto_bbbbbbbb.ipynb",
+    "cccccccc": "pruebas/proyecto_cccccccc.ipynb"
 }
 
 # Crear archivo de registro si no existe
