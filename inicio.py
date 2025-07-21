@@ -22,7 +22,8 @@ codigos_validos = {
     "f4f9bf9f": "pruebas/proyecto_f4f9bf9f.ipynb",
     "aaaaaaaa": "pruebas/proyecto_aaaaaaaa.ipynb",
     "bbbbbbbb": "pruebas/proyecto_bbbbbbbb.ipynb",
-    "cccccccc": "pruebas/proyecto_cccccccc.ipynb"
+    "cccccccc": "pruebas/proyecto_cccccccc.ipynb",
+    "12345678": "pruebas/examen.ipynb"
 }
 
 # Crear archivo de registro si no existe
