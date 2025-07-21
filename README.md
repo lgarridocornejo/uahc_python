@@ -1,4 +1,3 @@
 
 
-[Link text](https://website-name.com)
-https://uahc-python.streamlit.app/
+[Descarga tu Jupyter notebook](https://uahc-python.streamlit.app/)
