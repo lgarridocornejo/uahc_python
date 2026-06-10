@@ -3,8 +3,17 @@ import pandas as pd
 import datetime
 import os
 
+
+
+
+
 # Diccionario solo de códigos válidos
 codigos_validos = {
+    "aa105482": "pruebas/proyecto_aa105482.ipynb",
+    "aa284105": "pruebas/proyecto_aa284105.ipynb",
+    "aa629354": "pruebas/proyecto_aa629354.ipynb",
+    "aa741936": "pruebas/proyecto_aa741936.ipynb",
+    "aa853017": "pruebas/proyecto_aa853017.ipynb",
     "d6364414": "pruebas/prueba_d6364414.ipynb",
     "de2913d7": "pruebas/prueba_de2913d7.ipynb",
     "424459e2": "pruebas/prueba_424459e2.ipynb",
